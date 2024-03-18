@@ -5,24 +5,30 @@ import { StyleSheet, TextInput, View } from "react-native";
 import defaultStyles from "../config/defaultStyles";
 import AppText from "./AppText";
 
-function ListItem({ checkValue, handleChangeCheck, handleChangeText, number }) {
+function ListItem({
+  checkValue,
+  handleChangeCheck,
+  handleChangeText,
+  itemName,
+  number,
+}) {
   return (
     <View style={styles.contianer}>
       <View style={styles.element}>
         <TextInput
           value={number}
           maxLength={3}
-          onChangeText={(value) => handleChangeText(value)}
+          onChangeText={handleChangeText}
           keyboardType="numeric"
           style={styles.value}
         />
         <Divider orientation="vertical" width={1} style={styles.divider} />
-        <AppText style={styles.name}>Knekkebrød</AppText>
+        <AppText style={styles.name}>{itemName}</AppText>
       </View>
       <Checkbox
         style={styles.chekbox}
         value={checkValue}
-        onValueChange={() => handleChangeCheck(!checkValue)}
+        onValueChange={handleChangeCheck}
         color={checkValue ? "#6fc276" : defaultStyles.colors.medium}
       />
     </View>
