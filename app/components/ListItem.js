@@ -13,7 +13,7 @@ function ListItem({
   number,
 }) {
   return (
-    <View style={styles.contianer}>
+    <View style={styles.container}>
       <View style={styles.element}>
         <TextInput
           value={number}
@@ -36,12 +36,15 @@ function ListItem({
 }
 
 const styles = StyleSheet.create({
-  contianer: {
+  container: {
+    alignSelf: "center",
+    margin: 3,
+    borderRadius: 10,
     padding: 5,
     justifyContent: "space-between",
     alignItems: "center",
     flexDirection: "row",
-    width: "100%",
+    width: "97%",
     backgroundColor: defaultStyles.colors.light,
   },
   chekbox: {

@@ -19,11 +19,10 @@ export default function App() {
     console.log(listItems);
   };
   const handleChangeText = (text, id) => {
-    // Update the 'value' property of the item with the given id
     const updatedListItems = listItems.map((item) =>
       item.id === id ? { ...item, value: parseInt(text) || 0 } : item
     );
-    setListItems(updatedListItems); // Update the state with the modified items
+    setListItems(updatedListItems);
   };
 
   return (
