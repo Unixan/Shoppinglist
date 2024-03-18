@@ -5,13 +5,13 @@ import Constants from "expo-constants";
 function Screen({ children }) {
   return (
     <SafeAreaView>
-      <View style={styles.contianer}>{children}</View>
+      <View style={styles.container}>{children}</View>
     </SafeAreaView>
   );
 }
 
 const styles = StyleSheet.create({
-  contianer: {
+  container: {
     paddingTop: Constants.statusBarHeight,
   },
 });

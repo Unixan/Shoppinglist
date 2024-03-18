@@ -22,7 +22,7 @@ function ListItemsList({ items, handleChangeCheck, handleChangeText }) {
 }
 
 const styles = StyleSheet.create({
-  contianer: {},
+  container: {},
 });
 
 export default ListItemsList;
