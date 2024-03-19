@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import ListItemsList from "./app/components/ListItemsList";
 import Screen from "./app/components/Screen";
 
@@ -16,14 +16,21 @@ export default function App() {
       item.id === id ? { ...item, isDone: !item.isDone } : item
     );
     setListItems(updatedListItems);
-    console.log(listItems);
   };
   const handleChangeText = (text, id) => {
     const updatedListItems = listItems.map((item) =>
-      item.id === id ? { ...item, value: parseInt(text) || 0 } : item
+      item.id === id ? { ...item, value: parseFloat(text) || 0 } : item
     );
     setListItems(updatedListItems);
   };
+
+  useEffect(() => {
+    const newList = listItems.filter((item) => item.value > 0);
+    if (JSON.stringify(newList) !== JSON.stringify(listItems)) {
+      setListItems(newList);
+    }
+    console.log(listItems);
+  }, [listItems]);
 
   return (
     <Screen>

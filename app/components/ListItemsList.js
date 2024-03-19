@@ -13,11 +13,14 @@ function ListItemsList({ items, handleChangeCheck, handleChangeText }) {
   );
 
   return (
-    <FlatList
-      data={items}
-      keyExtractor={(item) => item.id.toString()}
-      renderItem={renderItem}
-    />
+    <>
+      <FlatList
+        data={items}
+        keyExtractor={(item) => item.id.toString()}
+        renderItem={renderItem}
+      />
+      <ListItem />
+    </>
   );
 }
 

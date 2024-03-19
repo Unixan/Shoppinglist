@@ -1,9 +1,11 @@
 import { Divider } from "@rneui/themed";
 import Checkbox from "expo-checkbox";
-import { StyleSheet, TextInput, View } from "react-native";
+import { Alert, StyleSheet, TextInput, View } from "react-native";
+import { MaterialCommunityIcons } from "@expo/vector-icons";
 
 import defaultStyles from "../config/defaultStyles";
 import AppText from "./AppText";
+import React, { useState } from "react";
 
 function ListItem({
   checkValue,
@@ -12,26 +14,63 @@ function ListItem({
   itemName,
   number,
 }) {
+  const [tempValue, setTempValue] = useState(number);
+
+  const isEmptyOrWhitespace = (input) => {
+    return !input || /^\s*$/.test(input);
+  };
+
+  const handleBlur = () => {
+    if (parseFloat(tempValue) <= 0 || isEmptyOrWhitespace(tempValue)) {
+      Alert.alert("Remove Item", "Do you want to remove this item?", [
+        {
+          text: "Cancel",
+          onPress: () => setTempValue(number),
+          style: "cancel",
+        },
+        {
+          text: "OK",
+          onPress: () => {
+            handleChangeText(tempValue);
+            setTempValue(number);
+          },
+        },
+      ]);
+    } else {
+      handleChangeText(tempValue);
+    }
+  };
+
   return (
-    <View style={styles.container}>
-      <View style={styles.element}>
-        <TextInput
-          value={number}
-          maxLength={3}
-          onChangeText={handleChangeText}
-          keyboardType="numeric"
-          style={styles.value}
-        />
-        <Divider orientation="vertical" width={1} style={styles.divider} />
-        <AppText style={styles.name}>{itemName}</AppText>
-      </View>
-      <Checkbox
-        style={styles.chekbox}
-        value={checkValue}
-        onValueChange={handleChangeCheck}
-        color={checkValue ? "#6fc276" : defaultStyles.colors.medium}
-      />
-    </View>
+    <>
+      {itemName && (
+        <View style={styles.container}>
+          <View style={styles.element}>
+            <TextInput
+              value={tempValue}
+              maxLength={3}
+              onBlur={handleBlur}
+              onChangeText={(value) => setTempValue(value)}
+              keyboardType="numeric"
+              style={styles.value}
+            />
+            <Divider orientation="vertical" width={1} style={styles.divider} />
+            <AppText style={styles.name}>{itemName}</AppText>
+          </View>
+          <Checkbox
+            style={styles.chekbox}
+            value={checkValue}
+            onValueChange={handleChangeCheck}
+            color={checkValue ? "#6fc276" : defaultStyles.colors.medium}
+          />
+        </View>
+      )}
+      {!itemName && (
+        <View style={styles.iconContainer}>
+          <MaterialCommunityIcons name="cart-plus" size={25} />
+        </View>
+      )}
+    </>
   );
 }
 
@@ -53,6 +92,16 @@ const styles = StyleSheet.create({
   },
   element: {
     flexDirection: "row",
+  },
+  iconContainer: {
+    alignItems: "center",
+    alignSelf: "flex-end",
+    backgroundColor: defaultStyles.colors.light,
+    borderRadius: 10,
+    height: 60,
+    justifyContent: "center",
+    margin: 8,
+    width: 60,
   },
   name: {
     paddingLeft: 8,
