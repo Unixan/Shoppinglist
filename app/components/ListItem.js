@@ -1,11 +1,17 @@
+import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { Divider } from "@rneui/themed";
 import Checkbox from "expo-checkbox";
-import { Alert, StyleSheet, TextInput, View } from "react-native";
-import { MaterialCommunityIcons } from "@expo/vector-icons";
+import {
+  Alert,
+  StyleSheet,
+  TextInput,
+  TouchableOpacity,
+  View,
+} from "react-native";
 
+import { useState } from "react";
 import defaultStyles from "../config/defaultStyles";
 import AppText from "./AppText";
-import React, { useState } from "react";
 
 function ListItem({
   checkValue,
@@ -67,7 +73,7 @@ function ListItem({
       )}
       {!itemName && (
         <View style={styles.iconContainer}>
-          <MaterialCommunityIcons name="cart-plus" size={25} />
+          <MaterialCommunityIcons name="cart-plus" size={30} />
         </View>
       )}
     </>

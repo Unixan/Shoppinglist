@@ -1,7 +1,17 @@
-import { FlatList, StyleSheet } from "react-native";
+import {
+  FlatList,
+  Modal,
+  StyleSheet,
+  Button,
+  TouchableOpacity,
+} from "react-native";
 import ListItem from "./ListItem";
+import { useState } from "react";
+import AddItem from "./AddItem";
 
 function ListItemsList({ items, handleChangeCheck, handleChangeText }) {
+  const [modalOpen, setModalOpen] = useState(false);
+
   const renderItem = ({ item }) => (
     <ListItem
       itemName={item.name}
@@ -12,6 +22,10 @@ function ListItemsList({ items, handleChangeCheck, handleChangeText }) {
     />
   );
 
+  const handleAddItem = () => {
+    setModalOpen(!modalOpen);
+  };
+
   return (
     <>
       <FlatList
@@ -19,7 +33,13 @@ function ListItemsList({ items, handleChangeCheck, handleChangeText }) {
         keyExtractor={(item) => item.id.toString()}
         renderItem={renderItem}
       />
-      <ListItem />
+      <TouchableOpacity onPress={handleAddItem}>
+        <ListItem />
+      </TouchableOpacity>
+      <Modal visible={modalOpen} animationType="slide">
+        <AddItem items={items} />
+        <Button title="Close" onPress={handleAddItem} />
+      </Modal>
     </>
   );
 }

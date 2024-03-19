@@ -2,16 +2,12 @@ import React from "react";
 import { View, StyleSheet, Text } from "react-native";
 import defaultStyles from "../config/defaultStyles";
 
-function AppText({ children, style }) {
+function AppText({ children, style, ...otherProps }) {
   return (
-    <View style={styles.container}>
-      <Text style={[defaultStyles.text, style]}>{children}</Text>
-    </View>
+    <Text style={[defaultStyles.text, style]} {...otherProps}>
+      {children}
+    </Text>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {},
-});
 
 export default AppText;
