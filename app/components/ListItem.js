@@ -100,9 +100,10 @@ const styles = StyleSheet.create({
     flexDirection: "row",
   },
   iconContainer: {
+    backgroundColor: "orange",
     alignItems: "center",
     alignSelf: "flex-end",
-    backgroundColor: defaultStyles.colors.light,
+
     borderRadius: 10,
     height: 60,
     justifyContent: "center",

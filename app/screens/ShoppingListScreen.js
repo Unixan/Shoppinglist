@@ -24,7 +24,10 @@ function ShoppingListScreen(props) {
     setListItems(updatedListItems);
   };
 
-  const handleAddItem = (item) => {};
+  const handleAddItem = (item) => {
+    const newList = [...listItems, item];
+    setListItems(newList);
+  };
 
   useEffect(() => {
     const newList = listItems.filter((item) => item.value > 0);
@@ -36,7 +39,7 @@ function ShoppingListScreen(props) {
   return (
     <Screen>
       <ListItemsList
-        handleAddItem={(item) => handleAddItem(item)}
+        handleAddItem={handleAddItem}
         items={listItems}
         handleChangeCheck={handleChangeCheck}
         handleChangeText={handleChangeText}
