@@ -12,7 +12,7 @@ function AppFormField({ icon, name, width, ...otherProps }) {
       <AppTextInput
         icon={icon}
         onBlur={() => setFieldTouched(name)}
-        onChangeText={() => handleChange(name)}
+        onChangeText={handleChange(name)}
         width={width}
         {...otherProps}
       />

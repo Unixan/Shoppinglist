@@ -1,7 +1,6 @@
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { useState } from "react";
 import {
-  Button,
   Modal,
   StyleSheet,
   TouchableWithoutFeedback,
@@ -13,13 +12,19 @@ import AppText from "../components/AppText";
 import defaultStyles from "../config/defaultStyles";
 import PickerItem from "./PickerItem";
 
-function AppPicker({ icon, items, placeholder, onSelectItem, selectedItem }) {
+function AppPicker({
+  items,
+  placeholder,
+  onSelectItem,
+  selectedItem,
+  width = "auto",
+}) {
   const [modalVisible, setModalVisible] = useState(false);
 
   return (
     <>
       <TouchableWithoutFeedback onPress={() => setModalVisible(true)}>
-        <View style={styles.container}>
+        <View style={[styles.container, { width }]}>
           {selectedItem ? (
             <AppText style={styles.text}>{selectedItem.name}</AppText>
           ) : (
@@ -27,7 +32,7 @@ function AppPicker({ icon, items, placeholder, onSelectItem, selectedItem }) {
           )}
           <MaterialCommunityIcons
             name="chevron-down"
-            size={20}
+            size={25}
             color={defaultStyles.colors.medium}
           />
         </View>
@@ -36,7 +41,6 @@ function AppPicker({ icon, items, placeholder, onSelectItem, selectedItem }) {
         <TouchableWithoutFeedback onPress={() => setModalVisible(false)}>
           <View style={styles.modalContainer}>
             <View style={styles.modal}>
-              <Button title="close" onPress={() => setModalVisible(false)} />
               <FlatList
                 data={items}
                 keyExtractor={(item) => item.id.toString()}

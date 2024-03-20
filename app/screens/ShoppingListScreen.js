@@ -4,11 +4,11 @@ import Screen from "../components/Screen";
 
 function ShoppingListScreen(props) {
   const [listItems, setListItems] = useState([
-    { id: 1, name: "Knekkebrød", value: 2, isDone: true },
-    { id: 2, name: "Ost", value: 1, isDone: false },
-    { id: 3, name: "Brød", value: 4, isDone: true },
-    { id: 4, name: "Melk", value: 2, isDone: false },
-    { id: 5, name: "Syltetøy", value: 1, isDone: true },
+    { id: 1, name: "Knekkebrød", value: 2, isDone: true, unit: "unit(s)" },
+    { id: 2, name: "Ost", value: 1, isDone: false, unit: "unit(s)" },
+    { id: 3, name: "Brød", value: 4, isDone: true, unit: "unit(s)" },
+    { id: 4, name: "Melk", value: 2, isDone: false, unit: "litres" },
+    { id: 5, name: "Syltetøy", value: 1, isDone: true, unit: "unit(s)" },
   ]);
 
   const handleChangeCheck = (id) => {
@@ -24,6 +24,8 @@ function ShoppingListScreen(props) {
     setListItems(updatedListItems);
   };
 
+  const handleAddItem = (item) => {};
+
   useEffect(() => {
     const newList = listItems.filter((item) => item.value > 0);
     if (JSON.stringify(newList) !== JSON.stringify(listItems)) {
@@ -34,6 +36,7 @@ function ShoppingListScreen(props) {
   return (
     <Screen>
       <ListItemsList
+        handleAddItem={(item) => handleAddItem(item)}
         items={listItems}
         handleChangeCheck={handleChangeCheck}
         handleChangeText={handleChangeText}

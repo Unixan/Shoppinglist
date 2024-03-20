@@ -1,11 +1,19 @@
-import { StyleSheet, TouchableWithoutFeedback, View } from "react-native";
+import { useFormikContext } from "formik";
+import { useState } from "react";
+import {
+  Button,
+  StyleSheet,
+  TouchableWithoutFeedback,
+  View,
+} from "react-native";
 import * as Yup from "yup";
 
-import { useState } from "react";
 import defaultStyles from "../config/defaultStyles";
-import AppPicker from "./AppPicker";
 import AppForm from "./Form/AppForm";
 import AppFormField from "./Form/AppFormField";
+import AppFormPicker from "./Form/AppFormPicker";
+import SubmitButton from "./Form/SubmitButton";
+import AppButton from "./AppButton";
 
 const validationSchema = Yup.object().shape({
   product: Yup.string().required().label("Product").min(3),
@@ -17,18 +25,36 @@ const units = [
   { id: 1, name: "unit(s)" },
   { id: 2, name: "kg" },
   { id: 3, name: "g" },
-  { id: 4, name: "oz" },
-  { id: 5, name: "lb" },
+  { id: 4, name: "litres" },
+  { id: 5, name: "oz" },
+  { id: 6, name: "lb" },
 ];
 
-function AddItem({ items, onModalClose }) {
-  const [selectedItem, setSelectedItem] = useState({ id: 1, name: "unit(s)" });
+function AddItem({ items, onModalClose, handleAddItem }) {
+  const [selectedItem, setSelectedItem] = useState(null);
+
   const handleContentPress = (event) => {
     event.stopPropagation();
   };
 
+  const handleSubmit = (values) => {
+    const newItem = {
+      id: items.length + 1,
+      name: values.product,
+      value: parseFloat(values.count),
+      isDone: false,
+      unit: values.unit.name,
+    };
+    handleAddItem(newItem);
+  };
+
   return (
-    <TouchableWithoutFeedback onPress={onModalClose}>
+    <TouchableWithoutFeedback
+      onPress={() => {
+        onModalClose();
+        setSelectedItem(null);
+      }}
+    >
       <View style={styles.container}>
         <TouchableWithoutFeedback onPress={handleContentPress}>
           <View style={styles.inputContainer}>
@@ -39,13 +65,13 @@ function AddItem({ items, onModalClose }) {
                 count: "",
                 unit: null,
               }}
-              onSubmit={(values) => console.log(values)}
+              onSubmit={(values) => handleSubmit(values)}
               validationSchema={validationSchema}
             >
               <AppFormField
                 maxLength={255}
                 name="product"
-                placeholder="Product ..."
+                placeholder="Product name ..."
               />
 
               <AppFormField
@@ -55,14 +81,24 @@ function AddItem({ items, onModalClose }) {
                 placeholder="Count"
                 width={80}
               />
-              <AppPicker
-                placeholder="Units"
+              <AppFormPicker
+                name="unit"
+                placeholder="Select unit type"
                 items={units}
+                width={180}
                 selectedItem={selectedItem}
                 onSelectItem={(item) => {
                   setSelectedItem(item);
                 }}
               />
+              <View style={styles.buttonContainer}>
+                <View style={styles.button}>
+                  <AppButton title="Cancel" onPress={onModalClose} />
+                </View>
+                <View style={styles.button}>
+                  <SubmitButton title="Add" />
+                </View>
+              </View>
             </AppForm>
           </View>
         </TouchableWithoutFeedback>
@@ -72,6 +108,17 @@ function AddItem({ items, onModalClose }) {
 }
 
 const styles = StyleSheet.create({
+  button: {
+    width: 100,
+  },
+  buttonContainer: {
+    flexDirection: "row",
+    alignSelf: "center",
+    width: "90%",
+    position: "absolute",
+    bottom: 20,
+    justifyContent: "space-around",
+  },
   container: {
     flex: 1,
     alignItems: "center",
@@ -79,10 +126,12 @@ const styles = StyleSheet.create({
     backgroundColor: "rgba(0, 0, 0, 0.7)",
   },
   inputContainer: {
-    borderRadius: 20,
     backgroundColor: defaultStyles.colors.white,
+    borderRadius: 20,
+    height: 400,
     width: "95%",
-    height: 320,
+    paddingHorizontal: 10,
+    paddingTop: 20,
   },
 });
 
