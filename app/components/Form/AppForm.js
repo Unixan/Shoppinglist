@@ -1,15 +1,23 @@
 import { Formik } from "formik";
-import * as Yup from "yup";
+import { View } from "react-native";
 
-function AppForm({ initialValues, onSubmit, validationSchema, children }) {
+function AppForm({
+  children,
+  initialValues,
+  onSubmit,
+  style,
+  validationSchema,
+}) {
   return (
-    <Formik
-      initialValues={initialValues}
-      onSubmit={onSubmit}
-      validationSchema={validationSchema}
-    >
-      {() => <>{children}</>}
-    </Formik>
+    <View style={style}>
+      <Formik
+        initialValues={initialValues}
+        onSubmit={onSubmit}
+        validationSchema={validationSchema}
+      >
+        {() => <>{children}</>}
+      </Formik>
+    </View>
   );
 }
 
