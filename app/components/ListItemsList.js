@@ -30,7 +30,7 @@ function ListItemsList({
     <>
       <FlatList
         data={items}
-        keyExtractor={(item) => item.id.toString()}
+        keyExtractor={(item) => item.id}
         renderItem={renderItem}
       />
       <TouchableOpacity onPress={handleModalState}>

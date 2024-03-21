@@ -1,19 +1,14 @@
-import { useFormikContext } from "formik";
 import { useState } from "react";
-import {
-  Button,
-  StyleSheet,
-  TouchableWithoutFeedback,
-  View,
-} from "react-native";
+import { StyleSheet, TouchableWithoutFeedback, View } from "react-native";
+import randomGUID from "./data/randomGUID";
 import * as Yup from "yup";
 
 import defaultStyles from "../config/defaultStyles";
+import AppButton from "./AppButton";
 import AppForm from "./Form/AppForm";
 import AppFormField from "./Form/AppFormField";
 import AppFormPicker from "./Form/AppFormPicker";
 import SubmitButton from "./Form/SubmitButton";
-import AppButton from "./AppButton";
 
 const validationSchema = Yup.object().shape({
   product: Yup.string().required().label("Product").min(3),
@@ -38,14 +33,16 @@ function AddItem({ items, onModalClose, handleAddItem }) {
   };
 
   const handleSubmit = (values) => {
-    const newItem = {
-      id: items.length + 1,
-      name: values.product,
-      value: parseFloat(values.count),
-      isDone: false,
-      unit: values.unit.name,
-    };
-    handleAddItem(newItem);
+    const newId = randomGUID();
+    console.log(newId);
+    // const newItem = {
+    //   id: newId,
+    //   name: values.product,
+    //   value: parseFloat(values.count),
+    //   isDone: false,
+    //   unit: values.unit.name,
+    // };
+    // handleAddItem(newItem);
   };
 
   return (
