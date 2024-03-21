@@ -1,5 +1,10 @@
+import Screen from "./app/components/Screen";
 import ShoppingListScreen from "./app/screens/ShoppingListScreen";
 
 export default function App() {
-  return <ShoppingListScreen />;
+  return (
+    <Screen>
+      <ShoppingListScreen />
+    </Screen>
+  );
 }

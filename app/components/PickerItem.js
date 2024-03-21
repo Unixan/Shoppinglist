@@ -1,10 +1,6 @@
-import {
-  StyleSheet,
-  TouchableOpacity,
-  TouchableWithoutFeedback,
-} from "react-native";
-import AppText from "./AppText";
+import { StyleSheet, TouchableWithoutFeedback } from "react-native";
 import defaultStyles from "../config/defaultStyles";
+import AppText from "./AppText";
 
 function PickerItem({ item, onPress }) {
   return (

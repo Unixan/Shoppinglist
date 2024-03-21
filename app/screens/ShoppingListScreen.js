@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 import ListItemsList from "../components/ListItemsList";
-import Screen from "../components/Screen";
 
 function ShoppingListScreen(props) {
   const [listItems, setListItems] = useState([
@@ -64,17 +63,16 @@ function ShoppingListScreen(props) {
     if (JSON.stringify(newList) !== JSON.stringify(listItems)) {
       setListItems(newList);
     }
+    console.log(listItems);
   }, [listItems]);
 
   return (
-    <Screen>
-      <ListItemsList
-        handleAddItem={handleAddItem}
-        items={listItems}
-        handleChangeCheck={handleChangeCheck}
-        handleChangeText={handleChangeText}
-      />
-    </Screen>
+    <ListItemsList
+      handleAddItem={handleAddItem}
+      items={listItems}
+      handleChangeCheck={handleChangeCheck}
+      handleChangeText={handleChangeText}
+    />
   );
 }
 

@@ -34,15 +34,15 @@ function AddItem({ items, onModalClose, handleAddItem }) {
 
   const handleSubmit = (values) => {
     const newId = randomGUID();
-    console.log(newId);
-    // const newItem = {
-    //   id: newId,
-    //   name: values.product,
-    //   value: parseFloat(values.count),
-    //   isDone: false,
-    //   unit: values.unit.name,
-    // };
-    // handleAddItem(newItem);
+    const newItem = {
+      id: newId,
+      name: values.product,
+      value: parseFloat(values.count),
+      isDone: false,
+      unit: values.unit.name,
+    };
+    handleAddItem(newItem);
+    onModalClose();
   };
 
   return (

@@ -1,19 +1,15 @@
 import React from "react";
-import { View, StyleSheet, SafeAreaView } from "react-native";
+import { View, StyleSheet } from "react-native";
 import Constants from "expo-constants";
+import { PaperProvider } from "react-native-paper";
+import { SafeAreaView } from "react-native-safe-area-context";
 
 function Screen({ children }) {
   return (
-    <SafeAreaView>
-      <View style={styles.container}>{children}</View>
-    </SafeAreaView>
+    <PaperProvider>
+      <SafeAreaView>{children}</SafeAreaView>
+    </PaperProvider>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    paddingTop: Constants.statusBarHeight,
-  },
-});
 
 export default Screen;

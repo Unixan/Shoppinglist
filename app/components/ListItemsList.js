@@ -33,7 +33,10 @@ function ListItemsList({
         keyExtractor={(item) => item.id}
         renderItem={renderItem}
       />
-      <TouchableOpacity onPress={handleModalState}>
+      <TouchableOpacity
+        style={{ flex: 1, alignSelf: "flex-end" }}
+        onPress={handleModalState}
+      >
         <ListItem />
       </TouchableOpacity>
       <Modal transparent={true} visible={modalOpen} animationType="fade">

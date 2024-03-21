@@ -1,15 +1,9 @@
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { Divider } from "@rneui/themed";
 import Checkbox from "expo-checkbox";
-import {
-  Alert,
-  StyleSheet,
-  TextInput,
-  TouchableOpacity,
-  View,
-} from "react-native";
-
+import { Alert, StyleSheet, TextInput, View } from "react-native";
 import { useState } from "react";
+
 import defaultStyles from "../config/defaultStyles";
 import AppText from "./AppText";
 
@@ -100,10 +94,8 @@ const styles = StyleSheet.create({
     flexDirection: "row",
   },
   iconContainer: {
-    backgroundColor: "orange",
+    backgroundColor: defaultStyles.colors.light,
     alignItems: "center",
-    alignSelf: "flex-end",
-
     borderRadius: 10,
     height: 60,
     justifyContent: "center",
@@ -121,7 +113,7 @@ const styles = StyleSheet.create({
     textAlign: "right",
     paddingHorizontal: 5,
     width: 40,
-    backgroundColor: defaultStyles.colors.white,
+    backgroundColor: defaultStyles.colors.light,
   },
 });
 
