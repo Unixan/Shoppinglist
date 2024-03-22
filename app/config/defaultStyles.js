@@ -2,7 +2,7 @@ import { Platform } from "react-native";
 
 export default {
   colors: {
-    primary: "",
+    primary: "rgb(120, 69, 172)",
     secondary: "",
     white: "#fff",
     light: "rgb(240, 219, 255)",

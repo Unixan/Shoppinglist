@@ -113,7 +113,7 @@ const styles = StyleSheet.create({
     textAlign: "right",
     paddingHorizontal: 5,
     width: 40,
-    backgroundColor: defaultStyles.colors.light,
+    backgroundColor: defaultStyles.colors.white,
   },
 });
 

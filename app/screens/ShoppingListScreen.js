@@ -33,7 +33,7 @@ function ShoppingListScreen(props) {
     },
     {
       id: "d048dfd4-7a1a-4c83-a2b7-c91be8691cb4",
-      name: "Syltetøy",
+      name: "Snyltetøy",
       value: 1,
       isDone: true,
       unit: "unit(s)",
