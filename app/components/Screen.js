@@ -101,7 +101,7 @@ function Screen({ children }) {
 
   return (
     <PaperProvider theme={theme}>
-      <SafeAreaView>{children}</SafeAreaView>
+      <SafeAreaView style={{height: "100%"}}>{children}</SafeAreaView>
     </PaperProvider>
   );
 }

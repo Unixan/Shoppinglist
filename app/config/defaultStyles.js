@@ -13,7 +13,6 @@ export default {
     danger: "#ff5252",
   },
   text: {
-    color: "#0c0c0c",
     fontFamily: Platform.OS === "android" ? "Roboto" : "Avenir",
     fontSize: 18,
   },

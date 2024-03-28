@@ -1,13 +1,18 @@
-import React from "react";
-import { View, StyleSheet } from "react-native";
 import { useFormikContext } from "formik";
+import { StyleSheet } from "react-native";
+import SegmentSelector from "../SegmentSelector";
 
-function AppFormSegmentSelector(props) {
-  return <View style={styles.container}></View>;
+function AppFormSegmentSelector({ buttons, name }) {
+  const { handleChange, setFieldValue, values } = useFormikContext();
+
+  return (
+    <SegmentSelector
+      buttons={buttons}
+      selection={handleChange(name)}
+      onSelectItem={(item) => setFieldValue(name, item)}
+      selectedItem={values[name]}
+    />
+  );
 }
-
-const styles = StyleSheet.create({
-  container: {},
-});
 
 export default AppFormSegmentSelector;
