@@ -1,14 +1,9 @@
 import { useState } from "react";
-import { StyleSheet, TouchableWithoutFeedback, View } from "react-native";
-import randomGUID from "./data/randomGUID";
+import { StyleSheet, Text } from "react-native";
 import * as Yup from "yup";
+import randomGUID from "./data/randomGUID";
 
 import defaultStyles from "../config/defaultStyles";
-import AppButton from "./AppButton";
-import AppForm from "./Form/AppForm";
-import AppFormField from "./Form/AppFormField";
-import AppFormPicker from "./Form/AppFormPicker";
-import SubmitButton from "./Form/SubmitButton";
 
 const validationSchema = Yup.object().shape({
   product: Yup.string().required().label("Product").min(3),
@@ -46,61 +41,7 @@ function AddItem({ items, onModalClose, handleAddItem }) {
   };
 
   return (
-    <TouchableWithoutFeedback
-      onPress={() => {
-        onModalClose();
-        setSelectedItem(null);
-      }}
-    >
-      <View style={styles.container}>
-        <TouchableWithoutFeedback onPress={handleContentPress}>
-          <View style={styles.inputContainer}>
-            <AppForm
-              style={{ padding: 10 }}
-              initialValues={{
-                product: "",
-                count: "",
-                unit: null,
-              }}
-              onSubmit={(values) => handleSubmit(values)}
-              validationSchema={validationSchema}
-            >
-              <AppFormField
-                maxLength={255}
-                name="product"
-                placeholder="Product name ..."
-              />
-
-              <AppFormField
-                keyboardType="numeric"
-                maxLength={3}
-                name="count"
-                placeholder="Count"
-                width={80}
-              />
-              <AppFormPicker
-                name="unit"
-                placeholder="Select unit type"
-                items={units}
-                width={180}
-                selectedItem={selectedItem}
-                onSelectItem={(item) => {
-                  setSelectedItem(item);
-                }}
-              />
-              <View style={styles.buttonContainer}>
-                <View style={styles.button}>
-                  <AppButton title="Cancel" onPress={onModalClose} />
-                </View>
-                <View style={styles.button}>
-                  <SubmitButton title="Add" />
-                </View>
-              </View>
-            </AppForm>
-          </View>
-        </TouchableWithoutFeedback>
-      </View>
-    </TouchableWithoutFeedback>
+   <><Text>Hello</Text></>
   );
 }
 
