@@ -79,11 +79,25 @@ function AddItem({ onModalClose, handleAddItem }) {
                   width="70%"
                 />
               </View>
-              <AppFormSegmentSelector
-                name="unit"
-                buttons={units}
-                selectedItem={selectedItem}
-              />
+              <Surface elevation={0} style={styles.unitSelector}>
+                <AppFormSegmentSelector
+                  name="unit"
+                  buttons={[
+                    { value: "Pcs", label: "Pieces" },
+                    { value: "Kg", label: "Kilos" },
+                    { value: "g", label: "grams" },
+                  ]}
+                  selectedItem={selectedItem}
+                />
+                <AppFormSegmentSelector
+                  name="unit"
+                  buttons={[
+                    { value: "l", label: "litres" },
+                    { value: "dl", label: "decilitres" },
+                  ]}
+                  selectedItem={selectedItem}
+                />
+              </Surface>
               <View style={styles.buttonContainer}>
                 <View style={styles.button}>
                   <Button mode="elevated" onPress={onModalClose}>
@@ -122,7 +136,7 @@ const styles = StyleSheet.create({
   inputContainer: {
     marginTop: 30,
     borderRadius: 20,
-    height: 250,
+    height: 300,
     width: "95%",
     paddingTop: 20,
   },
@@ -130,7 +144,10 @@ const styles = StyleSheet.create({
     justifyContent: "space-around",
     flexDirection: "row",
     width: "100%",
-    paddingBottom: 20,
+    paddingBottom: 5,
+  },
+  unitSelector: {
+    margin: 10,
   },
 });
 
