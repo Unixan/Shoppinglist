@@ -29,7 +29,7 @@ function ShoppingListScreen(props) {
       name: "Melk",
       value: 2,
       isDone: false,
-      unit: "Pcs",
+      unit: "l",
     },
     {
       id: "d048dfd4-7a1a-4c83-a2b7-c91be8691cb4",

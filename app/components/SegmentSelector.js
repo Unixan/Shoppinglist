@@ -7,15 +7,10 @@ function SegmentSelector({
   onSelectItem,
   selectedItem,
   width = "100%",
+  backgroundColor = "white",
 }) {
-  const [value, setValue] = useState();
-
-  const handleSelection = (item) => {
-    onSelectItem(item);
-  };
-
   return (
-    <View style={[styles.container, { width }]}>
+    <View style={[styles.container, { width, backgroundColor }]}>
       <ScrollView horizontal showsHorizontalScrollIndicator={false}>
         <SegmentedButtons
           value={selectedItem}

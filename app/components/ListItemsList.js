@@ -1,8 +1,15 @@
 import { useState } from "react";
-import { FlatList, Modal, StyleSheet, TouchableOpacity } from "react-native";
+import {
+  FlatList,
+  Modal,
+  StyleSheet,
+  TouchableOpacity,
+  View,
+} from "react-native";
 
 import AddItem from "./AddItem";
 import ListItem from "./ListItem";
+import { FAB } from "react-native-paper";
 
 function ListItemsList({
   items,
@@ -27,29 +34,41 @@ function ListItemsList({
   };
 
   return (
-    <>
+    <View style={styles.container}>
       <FlatList
+        style={styles.list}
         data={items}
         keyExtractor={(item) => item.id}
         renderItem={renderItem}
       />
-      <TouchableOpacity
-        style={{ flex: 1, alignSelf: "flex-end" }}
+      <FAB
+        style={styles.fab}
+        icon="cart-plus"
         onPress={handleModalState}
+        customSize={60}
       >
         <ListItem />
-      </TouchableOpacity>
+      </FAB>
       <Modal transparent={true} visible={modalOpen} animationType="fade">
         <AddItem
-          items={items}
           onModalClose={() => handleModalState()}
           handleAddItem={handleAddItem}
         />
       </Modal>
-    </>
+    </View>
   );
 }
 
-const styles = StyleSheet.create({});
+const styles = StyleSheet.create({
+  fab: {
+    alignSelf: "flex-end",
+    marginHorizontal: 10,
+    height: 60,
+    width: 60,
+  },
+  list: {
+    paddingVertical: 5,
+  },
+});
 
 export default ListItemsList;

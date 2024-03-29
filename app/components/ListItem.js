@@ -6,6 +6,7 @@ import { useState } from "react";
 
 import defaultStyles from "../config/defaultStyles";
 import AppText from "./AppText";
+import { FAB, Surface } from "react-native-paper";
 
 function ListItem({
   checkValue,
@@ -44,7 +45,7 @@ function ListItem({
   return (
     <>
       {itemName && (
-        <View style={styles.container}>
+        <Surface style={styles.container} elevation={2}>
           <View style={styles.element}>
             <TextInput
               value={tempValue}
@@ -63,27 +64,24 @@ function ListItem({
             onValueChange={handleChangeCheck}
             color={checkValue ? "#6fc276" : defaultStyles.colors.medium}
           />
-        </View>
+        </Surface>
       )}
-      {!itemName && (
-        <View style={styles.iconContainer}>
-          <MaterialCommunityIcons name="cart-plus" size={30} />
-        </View>
-      )}
+      {!itemName && <MaterialCommunityIcons name="cart-plus" size={30} />}
     </>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
+    flex: 1,
     alignSelf: "center",
-    margin: 3,
+    margin: 7,
     borderRadius: 10,
     padding: 5,
     justifyContent: "space-between",
     alignItems: "center",
     flexDirection: "row",
-    width: "97%",
+    width: "95%",
     backgroundColor: defaultStyles.colors.light,
   },
   chekbox: {

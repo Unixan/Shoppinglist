@@ -1,14 +1,15 @@
 import { useState } from "react";
 import { StyleSheet, TouchableWithoutFeedback, View } from "react-native";
+import { Button, Surface } from "react-native-paper";
 import * as Yup from "yup";
-import randomGUID from "./data/randomGUID";
 
+import randomGUID from "./data/randomGUID";
 import defaultStyles from "../config/defaultStyles";
-import AppButton from "./AppButton";
 import AppForm from "./Form/AppForm";
 import AppFormField from "./Form/AppFormField";
 import AppFormSegmentSelector from "./Form/AppFormSegmentSelector";
 import SubmitButton from "./Form/SubmitButton";
+import { useFormikContext } from "formik";
 
 const validationSchema = Yup.object().shape({
   product: Yup.string().required().label("Product").min(3),
@@ -17,14 +18,14 @@ const validationSchema = Yup.object().shape({
 });
 
 const units = [
-  { value: "pieces", label: "Pcs" },
-  { value: "kilos", label: "Kg" },
-  { value: "grams", label: "g" },
-  { value: "litres", label: "l" },
-  { value: "decilitres", label: "dl" },
+  { value: "Pcs", label: "Pieces" },
+  { value: "Kg", label: "Kilos" },
+  { value: "g", label: "grams" },
+  { value: "l", label: "litres" },
+  { value: "dl", label: "decilitres" },
 ];
 
-function AddItem({ items, onModalClose, handleAddItem }) {
+function AddItem({ onModalClose, handleAddItem }) {
   const [selectedItem, setSelectedItem] = useState(null);
 
   const handleContentPress = (event) => {
@@ -53,7 +54,7 @@ function AddItem({ items, onModalClose, handleAddItem }) {
     >
       <View style={styles.container}>
         <TouchableWithoutFeedback onPress={handleContentPress}>
-          <View style={styles.inputContainer}>
+          <Surface style={styles.inputContainer}>
             <AppForm
               validationSchema={validationSchema}
               initialValues={{
@@ -85,14 +86,16 @@ function AddItem({ items, onModalClose, handleAddItem }) {
               />
               <View style={styles.buttonContainer}>
                 <View style={styles.button}>
-                  <AppButton title="Cancel" onPress={onModalClose} />
+                  <Button mode="elevated" onPress={onModalClose}>
+                    Cancel
+                  </Button>
                 </View>
                 <View style={styles.button}>
                   <SubmitButton title="Add" />
                 </View>
               </View>
             </AppForm>
-          </View>
+          </Surface>
         </TouchableWithoutFeedback>
       </View>
     </TouchableWithoutFeedback>
@@ -112,13 +115,12 @@ const styles = StyleSheet.create({
     justifyContent: "space-around",
   },
   container: {
-    flex: 1,
+    height: "100%",
     alignItems: "center",
-    justifyContent: "center",
     backgroundColor: "rgba(0, 0, 0, 0.7)",
   },
   inputContainer: {
-    backgroundColor: defaultStyles.colors.white,
+    marginTop: 30,
     borderRadius: 20,
     height: 250,
     width: "95%",
