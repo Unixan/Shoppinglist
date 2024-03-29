@@ -3,30 +3,26 @@ import { StyleSheet, TouchableWithoutFeedback, View } from "react-native";
 import { Button, Surface } from "react-native-paper";
 import * as Yup from "yup";
 
-import randomGUID from "./data/randomGUID";
-import defaultStyles from "../config/defaultStyles";
 import AppForm from "./Form/AppForm";
 import AppFormField from "./Form/AppFormField";
 import AppFormSegmentSelector from "./Form/AppFormSegmentSelector";
 import SubmitButton from "./Form/SubmitButton";
-import { useFormikContext } from "formik";
+import randomGUID from "./data/randomGUID";
+import ErrorMessage from "./Form/ErrorMessage";
 
 const validationSchema = Yup.object().shape({
-  product: Yup.string().required().label("Product").min(3),
+  product: Yup.string().required().label("Product").min(2),
   count: Yup.string().required().label("Count"),
   unit: Yup.string().required().label("Unit type"),
 });
 
-const units = [
-  { value: "Pcs", label: "Pieces" },
-  { value: "Kg", label: "Kilos" },
-  { value: "g", label: "grams" },
-  { value: "l", label: "litres" },
-  { value: "dl", label: "decilitres" },
-];
-
 function AddItem({ onModalClose, handleAddItem }) {
   const [selectedItem, setSelectedItem] = useState(null);
+  const [error, setError] = useState(false);
+
+  const handleErrorChange = (error) => {
+    setError(error);
+  };
 
   const handleContentPress = (event) => {
     event.stopPropagation();
@@ -70,6 +66,7 @@ function AddItem({ onModalClose, handleAddItem }) {
                   name="count"
                   label="Count"
                   width="20%"
+                  onErrorChange={handleErrorChange}
                   keyboardType="decimal-pad"
                 />
                 <AppFormField
@@ -77,6 +74,7 @@ function AddItem({ onModalClose, handleAddItem }) {
                   name="product"
                   label="Product name"
                   width="70%"
+                  onErrorChange={handleErrorChange}
                 />
               </View>
               <Surface elevation={0} style={styles.unitSelector}>
@@ -88,6 +86,7 @@ function AddItem({ onModalClose, handleAddItem }) {
                     { value: "g", label: "grams" },
                   ]}
                   selectedItem={selectedItem}
+                  onErrorChange={handleErrorChange}
                 />
                 <AppFormSegmentSelector
                   name="unit"
@@ -96,8 +95,13 @@ function AddItem({ onModalClose, handleAddItem }) {
                     { value: "dl", label: "decilitres" },
                   ]}
                   selectedItem={selectedItem}
+                  onErrorChange={handleErrorChange}
                 />
               </Surface>
+              <ErrorMessage
+                visible={error}
+                error="All fields must be filled correctly"
+              />
               <View style={styles.buttonContainer}>
                 <View style={styles.button}>
                   <Button mode="elevated" onPress={onModalClose}>

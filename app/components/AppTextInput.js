@@ -1,7 +1,5 @@
-import React from "react";
-import { View, StyleSheet } from "react-native";
+import { StyleSheet, View } from "react-native";
 import { TextInput } from "react-native-paper";
-import { MaterialCommunityIcons } from "@expo/vector-icons";
 import defaultStyles from "../config/defaultStyles";
 
 function AppTextInput({ icon, width = "100%", ...otherProps }) {

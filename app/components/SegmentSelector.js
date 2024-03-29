@@ -1,5 +1,4 @@
-import React, { useState } from "react";
-import { View, StyleSheet, Text, Dimensions, ScrollView } from "react-native";
+import { StyleSheet } from "react-native";
 import { SegmentedButtons, Surface } from "react-native-paper";
 
 function SegmentSelector({

@@ -1,7 +1,7 @@
 import { useFormikContext } from "formik";
 import SegmentSelector from "../SegmentSelector";
 
-function AppFormSegmentSelector({ buttons, name }) {
+function AppFormSegmentSelector({ buttons, onErrorChange, name }) {
   const { handleChange, setFieldValue, values } = useFormikContext();
 
   return (

@@ -1,7 +1,6 @@
-import React from "react";
-import { View, StyleSheet } from "react-native";
-import AppText from "../AppText";
+import { StyleSheet } from "react-native";
 import defaultStyles from "../../config/defaultStyles";
+import AppText from "../AppText";
 
 function ErrorMessage({ error, visible }) {
   if (!visible) return null;
@@ -10,6 +9,7 @@ function ErrorMessage({ error, visible }) {
 
 const styles = StyleSheet.create({
   error: {
+    alignSelf: "center",
     color: defaultStyles.colors.danger,
   },
 });
