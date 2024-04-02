@@ -1,7 +1,13 @@
 import { useEffect, useState } from "react";
 import ListItemsList from "../components/ListItemsList";
+import { Portal, Snackbar } from "react-native-paper";
+import { StyleSheet } from "react-native";
 
 function ShoppingListScreen(props) {
+  const [snackBarVisibleOnDelete, setSnackBarVisibleOnDelete] = useState(false);
+  const [snackBarVisibleOnAdd, setSnackBarVisibleOnAdd] = useState(false);
+  const [modifiedItem, setDeletedModifiedItem] = useState("");
+  const [addedItem, setAddedItem] = useState("");
   const [listItems, setListItems] = useState([
     {
       id: "92185047-3001-4a17-9af3-b99a7a52c024",
@@ -50,12 +56,26 @@ function ShoppingListScreen(props) {
     const updatedListItems = listItems.map((item) =>
       item.id === id ? { ...item, value: parseFloat(text) || 0 } : item
     );
+    setDeletedModifiedItem(listItems.find((item) => item.id === id));
+    setSnackBarVisibleOnDelete(true);
     setListItems(updatedListItems);
   };
 
   const handleAddItem = (item) => {
     const newList = [...listItems, item];
+    setAddedItem(item);
+    setSnackBarVisibleOnAdd(true);
     setListItems(newList);
+  };
+
+  const handleSnackbarVisibleOnDelete = () => {
+    setSnackBarVisibleOnDelete(false);
+    setDeletedModifiedItem("");
+  };
+
+  const handleSnackbarVisibleOnAdd = () => {
+    setSnackBarVisibleOnAdd(false);
+    setAddedItem("");
   };
 
   useEffect(() => {
@@ -63,17 +83,44 @@ function ShoppingListScreen(props) {
     if (JSON.stringify(newList) !== JSON.stringify(listItems)) {
       setListItems(newList);
     }
-    console.log(listItems);
+    // console.log(listItems);
   }, [listItems]);
 
   return (
-    <ListItemsList
-      handleAddItem={handleAddItem}
-      items={listItems}
-      handleChangeCheck={handleChangeCheck}
-      handleChangeText={handleChangeText}
-    />
+    <>
+      <ListItemsList
+        handleAddItem={handleAddItem}
+        items={listItems}
+        handleChangeCheck={handleChangeCheck}
+        handleChangeText={handleChangeText}
+      />
+      <Portal>
+        <Snackbar
+          style={styles.snackBar}
+          duration={2000}
+          visible={snackBarVisibleOnDelete}
+          onDismiss={handleSnackbarVisibleOnDelete}
+        >
+          {modifiedItem.name + " was removed"}
+        </Snackbar>
+        <Snackbar
+          style={styles.snackBar}
+          duration={2000}
+          visible={snackBarVisibleOnAdd}
+          onDismiss={handleSnackbarVisibleOnAdd}
+        >
+          {addedItem.name + " added"}
+        </Snackbar>
+      </Portal>
+    </>
   );
 }
+
+const styles = StyleSheet.create({
+  snackBar: {
+    position: "absolute",
+    bottom: 10,
+  },
+});
 
 export default ShoppingListScreen;

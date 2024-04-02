@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { StyleSheet, TouchableWithoutFeedback, View } from "react-native";
-import { Button, Surface } from "react-native-paper";
+import { Button, Portal, Snackbar, Surface } from "react-native-paper";
 import * as Yup from "yup";
 
 import AppForm from "./Form/AppForm";
@@ -45,7 +45,7 @@ function AddItem({ onModalClose, handleAddItem }) {
     <TouchableWithoutFeedback
       onPress={() => {
         onModalClose();
-        setSelectedItem(null);
+        setSelectedItem("Pcs");
       }}
     >
       <View style={styles.container}>
@@ -56,7 +56,7 @@ function AddItem({ onModalClose, handleAddItem }) {
               initialValues={{
                 product: "",
                 count: "",
-                unit: null,
+                unit: "Pcs",
               }}
               onSubmit={(values) => handleSubmit(values)}
             >

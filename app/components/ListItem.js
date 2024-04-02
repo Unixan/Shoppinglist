@@ -2,12 +2,12 @@ import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { Divider } from "@rneui/themed";
 import Checkbox from "expo-checkbox";
 import { useRef, useState } from "react";
-import { Alert, StyleSheet, TextInput, View, Text } from "react-native";
+import { Alert, StyleSheet, TextInput, View } from "react-native";
 import { Surface } from "react-native-paper";
 
+import { Swipeable } from "react-native-gesture-handler";
 import defaultStyles from "../config/defaultStyles";
 import AppText from "./AppText";
-import { Swipeable } from "react-native-gesture-handler";
 
 function ListItem({
   checkValue,
@@ -96,41 +96,35 @@ function ListItem({
 
   return (
     <>
-      {itemName && (
-        <Swipeable
-          friction={1}
-          renderLeftActions={leftAction}
-          renderRightActions={rightAction}
-          onSwipeableOpen={(event) => onSwipeableOpen(event)}
-          rightThreshold={55}
-          ref={swipeableRef}
-        >
-          <Surface style={styles.container} elevation={2}>
-            <View style={styles.element}>
-              <TextInput
-                value={tempValue}
-                maxLength={3}
-                onBlur={handleBlur}
-                onChangeText={(value) => setTempValue(value)}
-                keyboardType="numeric"
-                style={styles.value}
-              />
-              <Divider
-                orientation="vertical"
-                width={1}
-                style={styles.divider}
-              />
-              <AppText style={styles.name}>{itemName}</AppText>
-            </View>
-            <Checkbox
-              style={styles.chekbox}
-              value={checkValue}
-              onValueChange={handleChangeCheck}
-              color={checkValue ? "#6fc276" : defaultStyles.colors.medium}
+      <Swipeable
+        friction={1}
+        renderLeftActions={leftAction}
+        renderRightActions={rightAction}
+        onSwipeableOpen={(event) => onSwipeableOpen(event)}
+        rightThreshold={55}
+        ref={swipeableRef}
+      >
+        <Surface style={styles.container} elevation={2}>
+          <View style={styles.element}>
+            <TextInput
+              value={tempValue}
+              maxLength={3}
+              onBlur={handleBlur}
+              onChangeText={(value) => setTempValue(value)}
+              keyboardType="numeric"
+              style={styles.value}
             />
-          </Surface>
-        </Swipeable>
-      )}
+            <Divider orientation="vertical" width={1} style={styles.divider} />
+            <AppText style={styles.name}>{itemName}</AppText>
+          </View>
+          <Checkbox
+            style={styles.chekbox}
+            value={checkValue}
+            onValueChange={handleChangeCheck}
+            color={checkValue ? "#6fc276" : defaultStyles.colors.medium}
+          />
+        </Surface>
+      </Swipeable>
     </>
   );
 }
