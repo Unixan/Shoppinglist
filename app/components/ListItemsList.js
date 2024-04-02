@@ -1,15 +1,9 @@
 import { useState } from "react";
-import {
-  FlatList,
-  Modal,
-  StyleSheet,
-  TouchableOpacity,
-  View,
-} from "react-native";
+import { FlatList, Modal, StyleSheet, View, Text } from "react-native";
 
+import { FAB } from "react-native-paper";
 import AddItem from "./AddItem";
 import ListItem from "./ListItem";
-import { FAB } from "react-native-paper";
 
 function ListItemsList({
   items,
@@ -26,6 +20,11 @@ function ListItemsList({
       checkValue={item.isDone}
       handleChangeCheck={() => handleChangeCheck(item.id)}
       handleChangeText={(text) => handleChangeText(text, item.id)}
+      renderRightAction={() => (
+        <View>
+          <Text>Test</Text>
+        </View>
+      )}
     />
   );
 
