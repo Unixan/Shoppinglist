@@ -5,7 +5,6 @@ function SegmentSelector({
   buttons,
   onSelectItem,
   selectedItem,
-  width = "100%",
   backgroundColor = "white",
 }) {
   return (

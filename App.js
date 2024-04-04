@@ -1,15 +1,11 @@
-import { GestureHandlerRootView } from "react-native-gesture-handler";
-import AddItem from "./app/components/AddItem";
-import ListItemsList from "./app/components/ListItemsList";
 import Screen from "./app/components/Screen";
 import ShoppingListScreen from "./app/screens/ShoppingListScreen";
+import WelcomeScreen from "./app/screens/WelcomeScreen";
 
 export default function App() {
   return (
     <Screen>
-      <GestureHandlerRootView>
-        <ShoppingListScreen />
-      </GestureHandlerRootView>
+      <WelcomeScreen />
     </Screen>
   );
 }

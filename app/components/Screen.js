@@ -1,4 +1,5 @@
 import { useColorScheme } from "react-native";
+import { GestureHandlerRootView } from "react-native-gesture-handler";
 import { PaperProvider, DefaultTheme } from "react-native-paper";
 import { SafeAreaView } from "react-native-safe-area-context";
 
@@ -101,7 +102,9 @@ function Screen({ children }) {
 
   return (
     <PaperProvider theme={theme}>
-      <SafeAreaView style={{height: "100%"}}>{children}</SafeAreaView>
+      <GestureHandlerRootView>
+        <SafeAreaView style={{ height: "100%" }}>{children}</SafeAreaView>
+      </GestureHandlerRootView>
     </PaperProvider>
   );
 }

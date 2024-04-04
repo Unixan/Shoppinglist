@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { FlatList, Modal, StyleSheet, View, Text } from "react-native";
-
 import { FAB } from "react-native-paper";
+
 import AddItem from "./AddItem";
 import ListItem from "./ListItem";
 

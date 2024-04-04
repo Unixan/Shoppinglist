@@ -1,14 +1,14 @@
 import { useState } from "react";
 import { StyleSheet, TouchableWithoutFeedback, View } from "react-native";
-import { Button, Portal, Snackbar, Surface } from "react-native-paper";
+import { Button, Surface } from "react-native-paper";
 import * as Yup from "yup";
 
 import AppForm from "./Form/AppForm";
 import AppFormField from "./Form/AppFormField";
 import AppFormSegmentSelector from "./Form/AppFormSegmentSelector";
+import ErrorMessage from "./Form/ErrorMessage";
 import SubmitButton from "./Form/SubmitButton";
 import randomGUID from "./data/randomGUID";
-import ErrorMessage from "./Form/ErrorMessage";
 
 const validationSchema = Yup.object().shape({
   product: Yup.string().required().label("Product").min(2),

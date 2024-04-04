@@ -1,10 +1,9 @@
-import React from "react";
-import { View, StyleSheet, Text } from "react-native";
+import { Text } from "react-native";
 import defaultStyles from "../config/defaultStyles";
 
 function AppText({ children, style, ...otherProps }) {
   return (
-    <Text style={[defaultStyles.text, style]} {...otherProps}>
+    <Text disabled style={[defaultStyles.text, style]} {...otherProps}>
       {children}
     </Text>
   );
