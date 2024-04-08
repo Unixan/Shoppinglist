@@ -1,6 +1,6 @@
-import { ImageBackground, StyleSheet, View } from "react-native";
-import { Surface, Button, TextInput } from "react-native-paper";
 import { useState } from "react";
+import { Dimensions, ImageBackground, StyleSheet, View } from "react-native";
+import { Button, Surface } from "react-native-paper";
 import * as Yup from "yup";
 
 import AppForm from "../components/Form/AppForm";
@@ -17,6 +17,7 @@ function LoginScreen(props) {
   const [showPassword, setShowPassword] = useState(false);
   return (
     <ImageBackground
+      resizeMode="cover"
       blurRadius={5}
       source={require("../assets/Background2.jpg")}
       style={styles.background}
@@ -63,14 +64,20 @@ function LoginScreen(props) {
 
 const styles = StyleSheet.create({
   background: {
-    height: "100%",
+    flex: 1,
     alignItems: "center",
+    height: Dimensions.get("window").height,
   },
   buttonContainer: {
     width: "100%",
     flexDirection: "row",
     justifyContent: "space-around",
     marginTop: 30,
+  },
+  container: {
+    flex: 1,
+    alignItems: "center",
+    justifyContent: "center",
   },
   loginContainer: {
     marginTop: 100,
