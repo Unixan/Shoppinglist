@@ -1,13 +1,23 @@
-import React, { useEffect } from "react";
 import { useFormikContext } from "formik";
+import React from "react";
 
 import AppTextInput from "../AppTextInput";
 
-function AppFormField({ icon, name, width, onErrorChange, ...otherProps }) {
+function AppFormField({
+  icon,
+  name,
+  width,
+  onErrorChange,
+  onPressIcon,
+  ...otherProps
+}) {
   const { setFieldTouched, handleChange, errors, touched } = useFormikContext();
-  React.useEffect(() => {
-    onErrorChange(errors[name] && touched[name]);
-  }, [errors[name], touched[name], onErrorChange]);
+
+  if (onErrorChange) {
+    React.useEffect(() => {
+      onErrorChange(errors[name] && touched[name]);
+    }, [errors[name], touched[name], onErrorChange]);
+  }
 
   return (
     <>
@@ -15,6 +25,7 @@ function AppFormField({ icon, name, width, onErrorChange, ...otherProps }) {
         icon={icon}
         onBlur={() => setFieldTouched(name)}
         onChangeText={handleChange(name)}
+        onPressIcon={onPressIcon}
         width={width}
         error={errors[name] && touched[name]}
         {...otherProps}
