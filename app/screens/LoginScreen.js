@@ -14,9 +14,14 @@ import AppForm from "../components/Form/AppForm";
 import AppFormField from "../components/Form/AppFormField";
 import SubmitButton from "../components/Form/SubmitButton";
 import defaultStyles from "../config/defaultStyles";
+import User from "../model/User";
+import ErrorMessage from "../components/Form/ErrorMessage";
 
 const validationSchema = Yup.object().shape({
-  emailAddress: Yup.string().email().required().label("Username"),
+  emailAddress: Yup.string()
+    .email("Invalid email address")
+    .required()
+    .label("Email address"),
   password: Yup.string().required().label("Password"),
 });
 
@@ -24,11 +29,35 @@ const tempUsers = [
   {
     email: "staale_80@hotmail.com",
     userName: "Ståle",
+    password: "Apetryne1",
+  },
+  {
+    email: "helene.persson11@gmail.com",
+    userName: "Helene",
+    password: "Apetryne2",
   },
 ];
 
 function LoginScreen({ navigation }) {
   const [showPassword, setShowPassword] = useState(false);
+  const [currentUser, setCurrentUser] = useState({});
+  const [wrongInfo, setWrongInfo] = useState(false);
+
+  const handleSubmit = ({ emailAddress, password }) => {
+    const user = new User(emailAddress.toLowerCase(), password);
+    if (
+      tempUsers.find(
+        (userdata) =>
+          user.email === userdata.email && user.password === userdata.password
+      )
+    ) {
+      setCurrentUser(user);
+      console.log(currentUser);
+    } else {
+      setWrongInfo(true);
+    }
+  };
+
   return (
     <ImageBackground
       resizeMode="cover"
@@ -38,7 +67,7 @@ function LoginScreen({ navigation }) {
     >
       <Surface style={styles.loginContainer}>
         <AppForm
-          onSubmit={() => console.log("submit")}
+          onSubmit={(values) => handleSubmit(values)}
           validationSchema={validationSchema}
           initialValues={{
             emailAddress: "",
@@ -47,12 +76,14 @@ function LoginScreen({ navigation }) {
         >
           <View style={styles.inputFields}>
             <AppFormField
+              onChange={() => setWrongInfo(false)}
               label="Email address ..."
               icon="email"
               name="emailAddress"
               keyboardType="email-address"
             />
             <AppFormField
+              onChange={() => setWrongInfo(false)}
               label="Password ..."
               secureTextEntry={!showPassword}
               icon={showPassword ? "eye" : "eye-off"}
@@ -60,7 +91,14 @@ function LoginScreen({ navigation }) {
               onPressIcon={() => setShowPassword(!showPassword)}
             />
           </View>
-
+          {wrongInfo ? (
+            <ErrorMessage
+              error="Wrong username and/or password"
+              visible={wrongInfo}
+            />
+          ) : (
+            <AppText> </AppText>
+          )}
           <View style={styles.buttonContainer}>
             <Button
               labelStyle={[defaultStyles.text, { textTransform: "uppercase" }]}
@@ -97,7 +135,7 @@ const styles = StyleSheet.create({
     width: "100%",
     flexDirection: "row",
     justifyContent: "space-around",
-    marginTop: 30,
+    marginTop: 10,
   },
   container: {
     flex: 1,
