@@ -3,7 +3,7 @@ import defaultStyles from "../config/defaultStyles";
 
 function AppText({ children, style, ...otherProps }) {
   return (
-    <Text disabled style={[defaultStyles.text, style]} {...otherProps}>
+    <Text style={[defaultStyles.text, style]} {...otherProps}>
       {children}
     </Text>
   );

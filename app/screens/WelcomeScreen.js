@@ -2,7 +2,7 @@ import { Image, ImageBackground, StyleSheet } from "react-native";
 import { Button, Surface } from "react-native-paper";
 import defaultStyles from "../config/defaultStyles";
 
-function WelcomeScreen(props) {
+function WelcomeScreen({ navigation }) {
   return (
     <ImageBackground
       blurRadius={5}
@@ -12,7 +12,7 @@ function WelcomeScreen(props) {
       <Image style={styles.logo} source={require("../assets/Logo.png")} />
       <Surface mode="flat" style={styles.buttonContainer}>
         <Button
-          onPress={() => console.log("Log in")}
+          onPress={() => navigation.navigate("Login")}
           style={styles.button}
           labelStyle={styles.buttonText}
           mode="contained"
@@ -20,7 +20,7 @@ function WelcomeScreen(props) {
           Log in
         </Button>
         <Button
-          onPress={() => console.log("Sign up")}
+          onPress={() => navigation.navigate("Signup")}
           style={styles.button}
           labelStyle={styles.buttonText}
           mode="contained"

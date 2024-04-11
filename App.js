@@ -1,12 +1,12 @@
 import Screen from "./app/components/Screen";
-import LoginScreen from "./app/screens/LoginScreen";
-import ShoppingListScreen from "./app/screens/ShoppingListScreen";
+import AuthNavigator from "./app/navigation/AuthNavigator";
 import WelcomeScreen from "./app/screens/WelcomeScreen";
+import { NavigationContainer } from "@react-navigation/native";
 
 export default function App() {
   return (
-    <Screen>
-      <LoginScreen />
-    </Screen>
+    <NavigationContainer>
+      <AuthNavigator />
+    </NavigationContainer>
   );
 }
